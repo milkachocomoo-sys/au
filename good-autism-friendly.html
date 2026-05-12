@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calm Garden — A Sensory-Friendly Space</title>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Lora:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* GOOD SITE — Autism-Friendly Design
+   Rules followed:
+   1. Muted, low-saturation color palette (no bright colors)
+   2. Off-white background (not pure white — reduces glare)
+   3. No animations / auto-play / flashing
+   4. prefers-reduced-motion respected
+   5. Large, readable font (18px+, line-height 1.7)
+   6. Accessible font (Atkinson Hyperlegible — designed for readability)
+   7. High contrast text (4.5:1+)
+   8. Predictable, consistent layout
+   9. Plain language — no idioms, no sarcasm
+   10. Icons always paired with text labels
+   11. No time limits
+   12. Color not the only signal (icons + text used together)
+   13. Large click targets (48px minimum)
+   14. Single-column layout — reduces cognitive load
+   15. User control: dark mode toggle, text size toggle
+*/
+
+:root {
+  --bg: #f5f2eb;
+  --bg2: #edeae0;
+  --text: #2a2a2a;
+  --muted: #555;
+  --sage: #6b8f6b;
+  --sage-l: #d6e8d6;
+  --blue: #5b7fa6;
+  --blue-l: #dce8f5;
+  --border: #d0ccc0;
+  --focus: #3d6bb5;
+  --radius: 8px;
+}
+
+[data-theme="dark"] {
+  --bg: #1e1e1e;
+  --bg2: #2a2a2a;
+  --text: #e8e4dc;
+  --muted: #aaa;
+  --sage: #7aad7a;
+  --sage-l: #2a3d2a;
+  --blue: #7aaad4;
+  --blue-l: #1e2d3d;
+  --border: #444;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* Respect reduced motion — NO animations at all if preferred */
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+
+body {
+  font-family: 'Atkinson Hyperlegible', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 18px;
+  line-height: 1.7;
+  /* No hidden overflow, no weird scroll behavior */
+}
+
+/* Skip to main content — keyboard accessibility */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--focus);
+  color: white;
+  padding: 8px 16px;
+  text-decoration: none;
+  font-weight: 700;
+  z-index: 1000;
+  border-radius: 0 0 8px 0;
+}
+.skip-link:focus { top: 0; }
+
+/* Header — simple, predictable */
+header {
+  background: var(--bg2);
+  border-bottom: 2px solid var(--border);
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.logo {
+  font-family: 'Lora', serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--text);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-icon {
+  width: 32px; height: 32px;
+  background: var(--sage-l);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem;
+}
+
+/* Controls — visible, persistent */
+.controls {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.ctrl-btn {
+  background: var(--bg);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  padding: 8px 16px;
+  font-family: 'Atkinson Hyperlegible', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px; /* minimum touch target */
+  transition: background 0.2s, border-color 0.2s;
+}
+.ctrl-btn:hover { background: var(--bg2); border-color: var(--sage); }
+.ctrl-btn:focus {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* Navigation — labeled, consistent */
+nav {
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+nav a {
+  display: block;
+  padding: 14px 18px;
+  text-decoration: none;
+  color: var(--muted);
+  font-weight: 700;
+  font-size: 0.95rem;
+  border-bottom: 3px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+}
+nav a:hover, nav a[aria-current="page"] {
+  color: var(--sage);
+  border-bottom-color: var(--sage);
+}
+nav a:focus {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* Main layout — single column, generous spacing */
+main {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 48px 24px 80px;
+}
+
+/* Page intro */
+.page-intro {
+  margin-bottom: 48px;
+}
+
+.page-intro h1 {
+  font-family: 'Lora', serif;
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--text);
+  margin-bottom: 16px;
+}
+
+.page-intro p {
+  font-size: 1.05rem;
+  color: var(--muted);
+  max-width: 600px;
+}
+
+/* Status/info banner */
+.banner {
+  background: var(--sage-l);
+  border: 1px solid var(--sage);
+  border-left: 5px solid var(--sage);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  margin-bottom: 40px;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.banner-icon {
+  font-size: 1.4rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.banner p {
+  font-size: 0.95rem;
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* Cards — clear, predictable */
+.section-title {
+  font-family: 'Lora', serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--border);
+}
+
+.card-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 48px;
+}
+
+.card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+  text-decoration: none;
+  color: var(--text);
+  transition: border-color 0.2s;
+}
+.card:hover { border-color: var(--blue); }
+.card:focus {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.card-icon {
+  width: 44px; height: 44px;
+  background: var(--blue-l);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+
+.card-body h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+.card-body p {
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* Form — accessible, predictable */
+.form-section {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  margin-bottom: 48px;
+}
+
+.form-group {
+  margin-bottom: 24px;
+}
+
+label {
+  display: block;
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+
+/* Required fields clearly marked with text, not just * */
+.required-note {
+  font-size: 0.8rem;
+  color: var(--muted);
+  font-weight: 400;
+  margin-left: 6px;
+}
+
+.hint {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
+input[type="text"],
+input[type="email"],
+textarea,
+select {
+  width: 100%;
+  background: var(--bg);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  font-family: 'Atkinson Hyperlegible', sans-serif;
+  font-size: 1rem;
+  color: var(--text);
+  transition: border-color 0.2s;
+}
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: var(--focus);
+  box-shadow: 0 0 0 3px rgba(61,107,181,0.15);
+}
+
+textarea { resize: vertical; min-height: 120px; }
+
+/* Submit button — large, clear */
+.btn-submit {
+  background: var(--sage);
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  padding: 14px 32px;
+  font-family: 'Atkinson Hyperlegible', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: background 0.2s;
+}
+.btn-submit:hover { background: #5a7a5a; }
+.btn-submit:focus {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+
+/* Text size utility */
+body.text-large { font-size: 20px; }
+body.text-large h1 { font-size: 2.2rem; }
+
+/* Footer — simple */
+footer {
+  background: var(--bg2);
+  border-top: 1px solid var(--border);
+  padding: 24px;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+/* Rules explanation box */
+.rules-box {
+  background: var(--blue-l);
+  border: 1px solid var(--blue);
+  border-left: 5px solid var(--blue);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  margin-bottom: 48px;
+}
+.rules-box h2 {
+  font-family: 'Lora', serif;
+  font-size: 1.1rem;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+.rules-box ul {
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.rules-box li {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+.rules-box li strong { color: var(--text); }
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<header>
+  <a href="#" class="logo" aria-label="Calm Garden — home">
+    <span class="logo-icon" aria-hidden="true">🌿</span>
+    Calm Garden
+  </a>
+  <div class="controls" role="group" aria-label="Display preferences">
+    <!-- Icon + text label — never icon alone -->
+    <button class="ctrl-btn" id="themeToggle" onclick="toggleTheme()" aria-pressed="false">
+      <span aria-hidden="true">🌙</span> Dark mode
+    </button>
+    <button class="ctrl-btn" id="sizeToggle" onclick="toggleSize()" aria-pressed="false">
+      <span aria-hidden="true">🔡</span> Larger text
+    </button>
+  </div>
+</header>
+
+<nav aria-label="Main navigation">
+  <ul>
+    <li><a href="#" aria-current="page">🏠 Home</a></li>
+    <li><a href="#">📖 About</a></li>
+    <li><a href="#">🌱 Resources</a></li>
+    <li><a href="#">✉️ Contact</a></li>
+  </ul>
+</nav>
+
+<main id="main">
+
+  <!-- Rules explanation — what this site does right -->
+  <div class="rules-box" role="note" aria-label="Design rules explanation">
+    <h2>✅ Autism-friendly rules followed on this page</h2>
+    <ul>
+      <li><strong>Muted palette:</strong> no bright, saturated colors — soft sage greens and dusty blues only</li>
+      <li><strong>Off-white background (#f5f2eb):</strong> reduces glare compared to pure white</li>
+      <li><strong>No animations or autoplay:</strong> nothing moves unless you click</li>
+      <li><strong>prefers-reduced-motion:</strong> CSS respects the OS setting</li>
+      <li><strong>Accessible font — Atkinson Hyperlegible:</strong> designed for low-vision readers, clear letterforms</li>
+      <li><strong>18px+ body text, 1.7 line-height:</strong> easy to read without strain</li>
+      <li><strong>Single-column layout:</strong> one clear path through the page, no overwhelm</li>
+      <li><strong>Icons always paired with text:</strong> never icon alone</li>
+      <li><strong>Large click targets (44–48px min):</strong> easy to tap on mobile</li>
+      <li><strong>Skip-to-content link:</strong> keyboard users can jump past nav</li>
+      <li><strong>Plain language:</strong> no idioms, sarcasm, or implied meaning</li>
+      <li><strong>User controls:</strong> dark mode + text size toggle — persistent, visible</li>
+      <li><strong>No time limits:</strong> the form has no countdown or session expiry</li>
+      <li><strong>Color not the only signal:</strong> errors would use icon + text + border — not just red</li>
+    </ul>
+  </div>
+
+  <div class="page-intro">
+    <h1>Welcome to Calm Garden</h1>
+    <p>This is a place for relaxation and learning. Everything here is designed to be clear, calm, and easy to use. You can change the text size or switch to dark mode using the buttons at the top.</p>
+  </div>
+
+  <div class="banner" role="status">
+    <span class="banner-icon" aria-hidden="true">ℹ️</span>
+    <p>This website follows autism-friendly design guidelines. If something feels uncomfortable, use the buttons in the top-right corner to adjust the display.</p>
+  </div>
+
+  <h2 class="section-title">Topics</h2>
+
+  <div class="card-list">
+    <a href="#" class="card" aria-label="Sensory tips — learn how to manage sensory experiences">
+      <div class="card-icon" aria-hidden="true">👂</div>
+      <div class="card-body">
+        <h3>Sensory tips</h3>
+        <p>Simple, practical ideas for managing sounds, lights, and textures in everyday life.</p>
+      </div>
+    </a>
+    <a href="#" class="card" aria-label="Routines — building predictable daily schedules">
+      <div class="card-icon" aria-hidden="true">📅</div>
+      <div class="card-body">
+        <h3>Routines</h3>
+        <p>How to build a daily schedule that feels safe and predictable. Step-by-step guides.</p>
+      </div>
+    </a>
+    <a href="#" class="card" aria-label="Communication — tools and strategies for clearer communication">
+      <div class="card-icon" aria-hidden="true">💬</div>
+      <div class="card-body">
+        <h3>Communication</h3>
+        <p>Tools and strategies for clear, comfortable communication with others.</p>
+      </div>
+    </a>
+  </div>
+
+  <!-- Form example — accessible -->
+  <h2 class="section-title">Send us a message</h2>
+  <div class="form-section">
+    <form onsubmit="handleSubmit(event)">
+      <div class="form-group">
+        <label for="name">Your name <span class="required-note">(required)</span></label>
+        <p class="hint" id="name-hint">Enter your first name, or a nickname — whatever you are comfortable with.</p>
+        <input type="text" id="name" name="name" autocomplete="given-name"
+               aria-describedby="name-hint" aria-required="true"
+               placeholder="e.g. Alex">
+      </div>
+      <div class="form-group">
+        <label for="email">Email address <span class="required-note">(required)</span></label>
+        <p class="hint" id="email-hint">We will only use this to reply to your message. We do not share it.</p>
+        <input type="email" id="email" name="email" autocomplete="email"
+               aria-describedby="email-hint" aria-required="true"
+               placeholder="e.g. alex@example.com">
+      </div>
+      <div class="form-group">
+        <label for="message">Your message <span class="required-note">(required)</span></label>
+        <p class="hint" id="msg-hint">Write whatever you want to say. There is no right or wrong way to write it.</p>
+        <textarea id="message" name="message"
+                  aria-describedby="msg-hint" aria-required="true"
+                  placeholder="Type your message here..."></textarea>
+      </div>
+      <button type="submit" class="btn-submit">
+        <span aria-hidden="true">✉️</span> Send message
+      </button>
+    </form>
+  </div>
+
+</main>
+
+<footer>
+  <p>Calm Garden · Designed with autism-friendly principles in mind · No cookies, no tracking</p>
+</footer>
+
+<script>
+function toggleTheme() {
+  const body = document.body;
+  const btn = document.getElementById('themeToggle');
+  const isDark = body.dataset.theme === 'dark';
+  if (isDark) {
+    delete body.dataset.theme;
+    btn.setAttribute('aria-pressed', 'false');
+    btn.innerHTML = '<span aria-hidden="true">🌙</span> Dark mode';
+  } else {
+    body.dataset.theme = 'dark';
+    btn.setAttribute('aria-pressed', 'true');
+    btn.innerHTML = '<span aria-hidden="true">☀️</span> Light mode';
+  }
+}
+
+function toggleSize() {
+  const body = document.body;
+  const btn = document.getElementById('sizeToggle');
+  const isLarge = body.classList.contains('text-large');
+  if (isLarge) {
+    body.classList.remove('text-large');
+    btn.setAttribute('aria-pressed', 'false');
+    btn.innerHTML = '<span aria-hidden="true">🔡</span> Larger text';
+  } else {
+    body.classList.add('text-large');
+    btn.setAttribute('aria-pressed', 'true');
+    btn.innerHTML = '<span aria-hidden="true">🔤</span> Normal text';
+  }
+}
+
+function handleSubmit(e) {
+  e.preventDefault();
+  alert('Thank you for your message. We will reply within 3 working days. You can close this page now.');
+}
+</script>
+</body>
+</html>
