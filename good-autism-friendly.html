@@ -6,25 +6,6 @@
 <title>Calm Garden — A Sensory-Friendly Space</title>
 <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Lora:wght@400;600&display=swap" rel="stylesheet">
 <style>
-/* GOOD SITE — Autism-Friendly Design
-   Rules followed:
-   1. Muted, low-saturation color palette (no bright colors)
-   2. Off-white background (not pure white — reduces glare)
-   3. No animations / auto-play / flashing
-   4. prefers-reduced-motion respected
-   5. Large, readable font (18px+, line-height 1.7)
-   6. Accessible font (Atkinson Hyperlegible — designed for readability)
-   7. High contrast text (4.5:1+)
-   8. Predictable, consistent layout
-   9. Plain language — no idioms, no sarcasm
-   10. Icons always paired with text labels
-   11. No time limits
-   12. Color not the only signal (icons + text used together)
-   13. Large click targets (48px minimum)
-   14. Single-column layout — reduces cognitive load
-   15. User control: dark mode toggle, text size toggle
-*/
-
 :root {
   --bg: #f5f2eb;
   --bg2: #edeae0;
@@ -34,11 +15,12 @@
   --sage-l: #d6e8d6;
   --blue: #5b7fa6;
   --blue-l: #dce8f5;
+  --warm: #c4915a;
+  --warm-l: #f5e8d6;
   --border: #d0ccc0;
   --focus: #3d6bb5;
   --radius: 8px;
 }
-
 [data-theme="dark"] {
   --bg: #1e1e1e;
   --bg2: #2a2a2a;
@@ -48,15 +30,14 @@
   --sage-l: #2a3d2a;
   --blue: #7aaad4;
   --blue-l: #1e2d3d;
+  --warm: #d4a070;
+  --warm-l: #3d2a1e;
   --border: #444;
 }
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-/* Respect reduced motion — NO animations at all if preferred */
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; animation: none !important; }
 }
+* { margin:0; padding:0; box-sizing:border-box; }
 
 body {
   font-family: 'Atkinson Hyperlegible', sans-serif;
@@ -64,25 +45,18 @@ body {
   color: var(--text);
   font-size: 18px;
   line-height: 1.7;
-  /* No hidden overflow, no weird scroll behavior */
 }
+body.text-large { font-size: 21px; }
 
-/* Skip to main content — keyboard accessibility */
 .skip-link {
-  position: absolute;
-  top: -40px;
-  left: 0;
-  background: var(--focus);
-  color: white;
-  padding: 8px 16px;
-  text-decoration: none;
-  font-weight: 700;
-  z-index: 1000;
+  position: absolute; top: -40px; left: 0;
+  background: var(--focus); color: white;
+  padding: 8px 16px; text-decoration: none;
+  font-weight: 700; z-index: 1000;
   border-radius: 0 0 8px 0;
 }
 .skip-link:focus { top: 0; }
 
-/* Header — simple, predictable */
 header {
   background: var(--bg2);
   border-bottom: 2px solid var(--border);
@@ -92,8 +66,8 @@ header {
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 12px;
+  position: sticky; top: 0; z-index: 100;
 }
-
 .logo {
   font-family: 'Lora', serif;
   font-size: 1.4rem;
@@ -103,23 +77,19 @@ header {
   display: flex;
   align-items: center;
   gap: 10px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-family: 'Lora', serif;
 }
-
 .logo-icon {
-  width: 32px; height: 32px;
+  width: 36px; height: 36px;
   background: var(--sage-l);
   border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
   font-size: 1.1rem;
 }
-
-/* Controls — visible, persistent */
-.controls {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
+.controls { display: flex; gap: 8px; flex-wrap: wrap; }
 .ctrl-btn {
   background: var(--bg);
   border: 2px solid var(--border);
@@ -130,32 +100,19 @@ header {
   font-weight: 700;
   color: var(--text);
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  min-height: 44px; /* minimum touch target */
+  display: flex; align-items: center; gap: 6px;
+  min-height: 44px;
   transition: background 0.2s, border-color 0.2s;
 }
 .ctrl-btn:hover { background: var(--bg2); border-color: var(--sage); }
-.ctrl-btn:focus {
-  outline: 3px solid var(--focus);
-  outline-offset: 2px;
-}
+.ctrl-btn:focus { outline: 3px solid var(--focus); outline-offset: 2px; }
 
-/* Navigation — labeled, consistent */
 nav {
   background: var(--bg2);
   border-bottom: 1px solid var(--border);
   padding: 0 24px;
 }
-
-nav ul {
-  list-style: none;
-  display: flex;
-  gap: 4px;
-  flex-wrap: wrap;
-}
-
+nav ul { list-style: none; display: flex; gap: 4px; flex-wrap: wrap; }
 nav a {
   display: block;
   padding: 14px 18px;
@@ -165,246 +122,183 @@ nav a {
   font-size: 0.95rem;
   border-bottom: 3px solid transparent;
   transition: color 0.2s, border-color 0.2s;
+  cursor: pointer;
+  user-select: none;
 }
-nav a:hover, nav a[aria-current="page"] {
-  color: var(--sage);
-  border-bottom-color: var(--sage);
-}
-nav a:focus {
-  outline: 3px solid var(--focus);
-  outline-offset: 2px;
-}
+nav a:hover { color: var(--sage); border-bottom-color: var(--sage); }
+nav a.active { color: var(--sage); border-bottom-color: var(--sage); }
+nav a:focus { outline: 3px solid var(--focus); outline-offset: 2px; }
 
-/* Main layout — single column, generous spacing */
-main {
-  max-width: 760px;
-  margin: 0 auto;
-  padding: 48px 24px 80px;
-}
+main { max-width: 780px; margin: 0 auto; padding: 48px 24px 80px; }
 
-/* Page intro */
-.page-intro {
-  margin-bottom: 48px;
-}
+.page { display: none; }
+.page.active { display: block; }
 
-.page-intro h1 {
+h1 {
   font-family: 'Lora', serif;
-  font-size: 2rem;
-  font-weight: 600;
-  line-height: 1.3;
-  color: var(--text);
-  margin-bottom: 16px;
+  font-size: 2rem; font-weight: 600; line-height: 1.3;
+  color: var(--text); margin-bottom: 16px;
 }
-
-.page-intro p {
-  font-size: 1.05rem;
-  color: var(--muted);
-  max-width: 600px;
+h2 {
+  font-family: 'Lora', serif;
+  font-size: 1.3rem; font-weight: 600;
+  color: var(--text); margin-bottom: 16px;
+  padding-bottom: 10px; border-bottom: 2px solid var(--border);
 }
+h3 { font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+p { color: var(--muted); margin-bottom: 16px; }
 
-/* Status/info banner */
 .banner {
   background: var(--sage-l);
-  border: 1px solid var(--sage);
-  border-left: 5px solid var(--sage);
+  border: 1px solid var(--sage); border-left: 5px solid var(--sage);
   border-radius: var(--radius);
-  padding: 16px 20px;
-  margin-bottom: 40px;
-  display: flex;
-  gap: 14px;
-  align-items: flex-start;
+  padding: 16px 20px; margin-bottom: 40px;
+  display: flex; gap: 14px; align-items: flex-start;
 }
+.banner-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 2px; }
+.banner p { font-size: 0.95rem; color: var(--text); line-height: 1.6; margin: 0; }
 
-.banner-icon {
-  font-size: 1.4rem;
-  flex-shrink: 0;
-  margin-top: 2px;
+.info-box {
+  background: var(--blue-l);
+  border: 1px solid var(--blue); border-left: 5px solid var(--blue);
+  border-radius: var(--radius);
+  padding: 16px 20px; margin-bottom: 32px;
 }
+.info-box p { margin: 0; font-size: 0.95rem; color: var(--text); }
 
-.banner p {
-  font-size: 0.95rem;
-  color: var(--text);
-  line-height: 1.6;
-}
-
-/* Cards — clear, predictable */
-.section-title {
-  font-family: 'Lora', serif;
-  font-size: 1.3rem;
-  font-weight: 600;
-  color: var(--text);
-  margin-bottom: 20px;
-  padding-bottom: 10px;
-  border-bottom: 2px solid var(--border);
-}
-
-.card-list {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  margin-bottom: 48px;
-}
-
+.card-list { display: flex; flex-direction: column; gap: 16px; margin-bottom: 48px; }
 .card {
   background: var(--bg2);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
+  border: 1px solid var(--border); border-radius: var(--radius);
   padding: 20px 24px;
-  display: flex;
-  gap: 18px;
-  align-items: flex-start;
-  text-decoration: none;
-  color: var(--text);
+  display: flex; gap: 18px; align-items: flex-start;
+  cursor: pointer;
   transition: border-color 0.2s;
+  color: var(--text);
 }
 .card:hover { border-color: var(--blue); }
-.card:focus {
-  outline: 3px solid var(--focus);
-  outline-offset: 2px;
-}
-
+.card:focus { outline: 3px solid var(--focus); outline-offset: 2px; }
 .card-icon {
-  width: 44px; height: 44px;
-  background: var(--blue-l);
-  border-radius: 8px;
+  width: 48px; height: 48px;
+  background: var(--blue-l); border-radius: 10px;
   display: flex; align-items: center; justify-content: center;
-  font-size: 1.3rem;
-  flex-shrink: 0;
+  font-size: 1.4rem; flex-shrink: 0;
 }
+.card-icon.sage { background: var(--sage-l); }
+.card-icon.warm { background: var(--warm-l); }
+.card-body p { font-size: 0.9rem; margin: 0; }
 
-.card-body h3 {
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--text);
-  margin-bottom: 6px;
-}
-.card-body p {
-  font-size: 0.9rem;
-  color: var(--muted);
-  line-height: 1.6;
-}
+.section { margin-bottom: 48px; }
 
-/* Form — accessible, predictable */
-.form-section {
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 28px;
-  margin-bottom: 48px;
+.tips-list { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }
+.tips-list li {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 14px 18px;
+  display: flex; gap: 14px; align-items: flex-start;
+  font-size: 0.95rem; color: var(--text);
 }
+.tip-icon { font-size: 1.2rem; flex-shrink: 0; }
 
-.form-group {
-  margin-bottom: 24px;
+.profile {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 28px; margin-bottom: 32px;
+  display: flex; gap: 24px; align-items: flex-start; flex-wrap: wrap;
 }
-
-label {
-  display: block;
-  font-weight: 700;
-  font-size: 0.95rem;
-  margin-bottom: 8px;
-  color: var(--text);
+.profile-avatar {
+  width: 80px; height: 80px; background: var(--sage-l);
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  font-size: 2.5rem; flex-shrink: 0;
 }
+.profile-body p { font-size: 0.9rem; margin: 0; }
 
-/* Required fields clearly marked with text, not just * */
-.required-note {
-  font-size: 0.8rem;
-  color: var(--muted);
-  font-weight: 400;
-  margin-left: 6px;
-}
-
-.hint {
-  font-size: 0.85rem;
-  color: var(--muted);
-  margin-bottom: 8px;
-  line-height: 1.5;
-}
-
-input[type="text"],
-input[type="email"],
-textarea,
-select {
-  width: 100%;
-  background: var(--bg);
-  border: 2px solid var(--border);
-  border-radius: var(--radius);
-  padding: 12px 16px;
-  font-family: 'Atkinson Hyperlegible', sans-serif;
-  font-size: 1rem;
-  color: var(--text);
-  transition: border-color 0.2s;
-}
-input:focus, textarea:focus, select:focus {
-  outline: none;
-  border-color: var(--focus);
-  box-shadow: 0 0 0 3px rgba(61,107,181,0.15);
-}
-
-textarea { resize: vertical; min-height: 120px; }
-
-/* Submit button — large, clear */
-.btn-submit {
-  background: var(--sage);
-  color: white;
-  border: none;
-  border-radius: var(--radius);
-  padding: 14px 32px;
-  font-family: 'Atkinson Hyperlegible', sans-serif;
-  font-size: 1rem;
-  font-weight: 700;
-  cursor: pointer;
-  min-height: 48px;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  transition: background 0.2s;
-}
-.btn-submit:hover { background: #5a7a5a; }
-.btn-submit:focus {
-  outline: 3px solid var(--focus);
-  outline-offset: 3px;
-}
-
-/* Text size utility */
-body.text-large { font-size: 20px; }
-body.text-large h1 { font-size: 2.2rem; }
-
-/* Footer — simple */
-footer {
-  background: var(--bg2);
-  border-top: 1px solid var(--border);
-  padding: 24px;
-  text-align: center;
-  font-size: 0.85rem;
-  color: var(--muted);
-}
-
-/* Rules explanation box */
 .rules-box {
   background: var(--blue-l);
-  border: 1px solid var(--blue);
-  border-left: 5px solid var(--blue);
-  border-radius: var(--radius);
-  padding: 20px 24px;
-  margin-bottom: 48px;
+  border: 1px solid var(--blue); border-left: 5px solid var(--blue);
+  border-radius: var(--radius); padding: 20px 24px; margin-bottom: 40px;
 }
-.rules-box h2 {
-  font-family: 'Lora', serif;
-  font-size: 1.1rem;
-  color: var(--text);
-  margin-bottom: 12px;
+.rules-box h2 { border: none; padding: 0; margin-bottom: 12px; font-size: 1.05rem; }
+.rules-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.rules-list li { font-size: 0.88rem; color: var(--muted); display: flex; gap: 8px; }
+.rules-list li strong { color: var(--text); }
+
+.form-section {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 28px; margin-bottom: 32px;
 }
-.rules-box ul {
-  padding-left: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
+.form-group { margin-bottom: 24px; }
+label { display: block; font-weight: 700; font-size: 0.95rem; margin-bottom: 6px; color: var(--text); }
+.req { font-size: 0.8rem; color: var(--muted); font-weight: 400; margin-left: 6px; }
+.hint { font-size: 0.85rem; color: var(--muted); margin-bottom: 8px; }
+input[type="text"], input[type="email"], textarea, select {
+  width: 100%; background: var(--bg);
+  border: 2px solid var(--border); border-radius: var(--radius);
+  padding: 12px 16px;
+  font-family: 'Atkinson Hyperlegible', sans-serif;
+  font-size: 1rem; color: var(--text); transition: border-color 0.2s;
 }
-.rules-box li {
-  font-size: 0.9rem;
-  color: var(--muted);
+input:focus, textarea:focus, select:focus {
+  outline: none; border-color: var(--focus);
+  box-shadow: 0 0 0 3px rgba(61,107,181,0.15);
 }
-.rules-box li strong { color: var(--text); }
+textarea { resize: vertical; min-height: 120px; }
+
+.btn {
+  background: var(--sage); color: white; border: none;
+  border-radius: var(--radius); padding: 14px 32px;
+  font-family: 'Atkinson Hyperlegible', sans-serif;
+  font-size: 1rem; font-weight: 700; cursor: pointer;
+  min-height: 48px; display: inline-flex; align-items: center; gap: 8px;
+  transition: background 0.2s;
+}
+.btn:hover { background: #5a7a5a; }
+.btn:focus { outline: 3px solid var(--focus); outline-offset: 3px; }
+.btn.blue { background: var(--blue); }
+.btn.blue:hover { background: #4a6e95; }
+
+.success-msg {
+  background: var(--sage-l); border: 1px solid var(--sage); border-left: 5px solid var(--sage);
+  border-radius: var(--radius); padding: 16px 20px;
+  display: none; gap: 12px; align-items: center;
+  font-weight: 700; color: var(--text); margin-top: 16px;
+}
+.success-msg.show { display: flex; }
+
+.resource-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 32px;
+}
+@media (max-width: 600px) { .resource-grid { grid-template-columns: 1fr; } }
+.resource-card {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 20px;
+}
+.resource-card h3 { font-size: 0.95rem; margin-bottom: 8px; }
+.resource-card p { font-size: 0.85rem; margin: 0; }
+.resource-tag {
+  display: inline-block; background: var(--blue-l); color: var(--blue);
+  font-size: 0.75rem; font-weight: 700; padding: 2px 8px;
+  border-radius: 20px; margin-bottom: 8px;
+}
+.resource-tag.sage { background: var(--sage-l); color: var(--sage); }
+.resource-tag.warm { background: var(--warm-l); color: var(--warm); }
+
+footer {
+  background: var(--bg2); border-top: 1px solid var(--border);
+  padding: 24px; text-align: center; font-size: 0.85rem; color: var(--muted);
+}
+
+.breadcrumb {
+  font-size: 0.85rem; color: var(--muted);
+  margin-bottom: 28px; display: flex; gap: 8px; align-items: center;
+}
+.breadcrumb span { color: var(--text); font-weight: 700; }
+.back-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  color: var(--blue); font-weight: 700; font-size: 0.9rem;
+  cursor: pointer; background: none; border: none;
+  font-family: 'Atkinson Hyperlegible', sans-serif; padding: 0;
+}
+.back-btn:hover { text-decoration: underline; }
+.back-btn:focus { outline: 3px solid var(--focus); outline-offset: 2px; }
 </style>
 </head>
 <body>
@@ -412,12 +306,11 @@ footer {
 <a href="#main" class="skip-link">Skip to main content</a>
 
 <header>
-  <a href="#" class="logo" aria-label="Calm Garden — home">
-    <span class="logo-icon" aria-hidden="true">🌿</span>
+  <button class="logo" onclick="showPage('home')" aria-label="Calm Garden — go to home page">
+    <div class="logo-icon" aria-hidden="true">🌿</div>
     Calm Garden
-  </a>
+  </button>
   <div class="controls" role="group" aria-label="Display preferences">
-    <!-- Icon + text label — never icon alone -->
     <button class="ctrl-btn" id="themeToggle" onclick="toggleTheme()" aria-pressed="false">
       <span aria-hidden="true">🌙</span> Dark mode
     </button>
@@ -429,110 +322,291 @@ footer {
 
 <nav aria-label="Main navigation">
   <ul>
-    <li><a href="#" aria-current="page">🏠 Home</a></li>
-    <li><a href="#">📖 About</a></li>
-    <li><a href="#">🌱 Resources</a></li>
-    <li><a href="#">✉️ Contact</a></li>
+    <li><a onclick="showPage('home')" id="nav-home" class="active" tabindex="0">🏠 Home</a></li>
+    <li><a onclick="showPage('about')" id="nav-about" tabindex="0">📖 About</a></li>
+    <li><a onclick="showPage('resources')" id="nav-resources" tabindex="0">🌱 Resources</a></li>
+    <li><a onclick="showPage('contact')" id="nav-contact" tabindex="0">✉️ Contact</a></li>
   </ul>
 </nav>
 
 <main id="main">
 
-  <!-- Rules explanation — what this site does right -->
-  <div class="rules-box" role="note" aria-label="Design rules explanation">
-    <h2>✅ Autism-friendly rules followed on this page</h2>
-    <ul>
-      <li><strong>Muted palette:</strong> no bright, saturated colors — soft sage greens and dusty blues only</li>
-      <li><strong>Off-white background (#f5f2eb):</strong> reduces glare compared to pure white</li>
-      <li><strong>No animations or autoplay:</strong> nothing moves unless you click</li>
-      <li><strong>prefers-reduced-motion:</strong> CSS respects the OS setting</li>
-      <li><strong>Accessible font — Atkinson Hyperlegible:</strong> designed for low-vision readers, clear letterforms</li>
-      <li><strong>18px+ body text, 1.7 line-height:</strong> easy to read without strain</li>
-      <li><strong>Single-column layout:</strong> one clear path through the page, no overwhelm</li>
-      <li><strong>Icons always paired with text:</strong> never icon alone</li>
-      <li><strong>Large click targets (44–48px min):</strong> easy to tap on mobile</li>
-      <li><strong>Skip-to-content link:</strong> keyboard users can jump past nav</li>
-      <li><strong>Plain language:</strong> no idioms, sarcasm, or implied meaning</li>
-      <li><strong>User controls:</strong> dark mode + text size toggle — persistent, visible</li>
-      <li><strong>No time limits:</strong> the form has no countdown or session expiry</li>
-      <li><strong>Color not the only signal:</strong> errors would use icon + text + border — not just red</li>
-    </ul>
-  </div>
+  <!-- HOME -->
+  <div class="page active" id="page-home">
+    <div class="rules-box" role="note">
+      <h2>✅ Autism-friendly rules followed on this site</h2>
+      <ul class="rules-list">
+        <li><span aria-hidden="true">🎨</span><div><strong>Muted palette:</strong> soft sage greens and dusty blues — no bright or saturated colors</div></li>
+        <li><span aria-hidden="true">💡</span><div><strong>Off-white background (#f5f2eb):</strong> reduces glare compared to pure white</div></li>
+        <li><span aria-hidden="true">🚫</span><div><strong>No animations or autoplay:</strong> nothing moves unless you click it</div></li>
+        <li><span aria-hidden="true">♿</span><div><strong>prefers-reduced-motion respected:</strong> all transitions disabled if the OS setting is on</div></li>
+        <li><span aria-hidden="true">🔤</span><div><strong>Atkinson Hyperlegible font:</strong> designed specifically for low-vision and dyslexic readers</div></li>
+        <li><span aria-hidden="true">📏</span><div><strong>18px+ body text, 1.7 line-height:</strong> comfortable to read without strain</div></li>
+        <li><span aria-hidden="true">📐</span><div><strong>Single-column layout:</strong> one clear path, no distractions</div></li>
+        <li><span aria-hidden="true">🏷️</span><div><strong>Icons always paired with text:</strong> never icon alone</div></li>
+        <li><span aria-hidden="true">👆</span><div><strong>Large click targets (44–48px min):</strong> easy to tap on mobile</div></li>
+        <li><span aria-hidden="true">⌨️</span><div><strong>Keyboard accessible:</strong> skip link, visible focus rings, logical tab order</div></li>
+        <li><span aria-hidden="true">💬</span><div><strong>Plain language:</strong> no idioms, no sarcasm, no implied meaning</div></li>
+        <li><span aria-hidden="true">🎛️</span><div><strong>User controls:</strong> dark mode + larger text — always visible at the top</div></li>
+        <li><span aria-hidden="true">⏱️</span><div><strong>No time limits:</strong> forms have no countdown, no session pressure</div></li>
+        <li><span aria-hidden="true">🗺️</span><div><strong>Predictable navigation:</strong> same nav on every page, breadcrumb trail, logo always goes home</div></li>
+      </ul>
+    </div>
 
-  <div class="page-intro">
     <h1>Welcome to Calm Garden</h1>
-    <p>This is a place for relaxation and learning. Everything here is designed to be clear, calm, and easy to use. You can change the text size or switch to dark mode using the buttons at the top.</p>
+    <p>This is a place for relaxation and learning. Everything here is designed to be clear, calm, and easy to use.</p>
+    <p>Use the navigation above to visit different sections. You can change the display using the buttons at the top.</p>
+
+    <div class="banner" role="status">
+      <span class="banner-icon" aria-hidden="true">ℹ️</span>
+      <p>This website follows autism-friendly design guidelines. Use the buttons in the top-right corner to switch to dark mode or make the text larger.</p>
+    </div>
+
+    <div class="section">
+      <h2>Explore the site</h2>
+      <div class="card-list">
+        <div class="card" onclick="showPage('about')" role="button" tabindex="0" aria-label="Go to About page">
+          <div class="card-icon sage" aria-hidden="true">📖</div>
+          <div class="card-body">
+            <h3>About</h3>
+            <p>Learn what Calm Garden is, why it was made, and which design principles it follows.</p>
+          </div>
+        </div>
+        <div class="card" onclick="showPage('resources')" role="button" tabindex="0" aria-label="Go to Resources page">
+          <div class="card-icon" aria-hidden="true">🌱</div>
+          <div class="card-body">
+            <h3>Resources</h3>
+            <p>Practical tips and tools for managing sensory experiences, routines, and communication.</p>
+          </div>
+        </div>
+        <div class="card" onclick="showPage('contact')" role="button" tabindex="0" aria-label="Go to Contact page">
+          <div class="card-icon warm" aria-hidden="true">✉️</div>
+          <div class="card-body">
+            <h3>Contact</h3>
+            <p>Send us a message. We will reply within 3 working days. There is no time limit on the form.</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div class="banner" role="status">
-    <span class="banner-icon" aria-hidden="true">ℹ️</span>
-    <p>This website follows autism-friendly design guidelines. If something feels uncomfortable, use the buttons in the top-right corner to adjust the display.</p>
+  <!-- ABOUT -->
+  <div class="page" id="page-about">
+    <div class="breadcrumb">
+      <button class="back-btn" onclick="showPage('home')">← Home</button>
+      <span aria-hidden="true">/</span>
+      <span>About</span>
+    </div>
+
+    <h1>About Calm Garden</h1>
+    <p>Calm Garden is a website designed with autism-friendly and sensory-inclusive principles in mind. Every design decision has a reason behind it.</p>
+
+    <div class="info-box">
+      <p><strong>This site is a demonstration.</strong> It was created as a student project to show how websites can be made more comfortable and accessible for autistic and neurodivergent users.</p>
+    </div>
+
+    <div class="section">
+      <h2>What is universal design?</h2>
+      <p>Universal design means creating products and systems that work for as many people as possible — without needing special adaptations. When we design for people who face the most barriers, the result is usually better for everyone.</p>
+      <p>For example: captions on videos help people who are deaf, but also people in noisy environments. Clear, plain language helps autistic users, but also anyone who is tired or reading in their second language.</p>
+    </div>
+
+    <div class="section">
+      <h2>Our design principles</h2>
+      <ul class="tips-list">
+        <li><span class="tip-icon" aria-hidden="true">🎨</span><div><strong>Calm colours.</strong> Soft, muted tones only. No bright neons, no harsh colour combinations.</div></li>
+        <li><span class="tip-icon" aria-hidden="true">🚫</span><div><strong>No surprise movement.</strong> Nothing animates, flashes, or auto-plays. Everything stays still until you choose to interact.</div></li>
+        <li><span class="tip-icon" aria-hidden="true">📖</span><div><strong>Clear language.</strong> Written in plain English. No sarcasm, no idioms, no unclear references.</div></li>
+        <li><span class="tip-icon" aria-hidden="true">🗺️</span><div><strong>Predictable structure.</strong> The navigation is the same on every page. You always know where you are and how to go back.</div></li>
+        <li><span class="tip-icon" aria-hidden="true">🎛️</span><div><strong>User control.</strong> You can switch to dark mode or increase text size at any time using the buttons at the top.</div></li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>Who made this?</h2>
+      <div class="profile">
+        <div class="profile-avatar" aria-hidden="true">🌿</div>
+        <div class="profile-body">
+          <h3>Calm Garden Project</h3>
+          <p>This site was created as a student project exploring universal design and autism-friendly web principles — based on research from the lecture materials on ASD, sensory processing, and the neurodiversity perspective.</p>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn" onclick="showPage('resources')">
+      <span aria-hidden="true">🌱</span> Explore resources
+    </button>
   </div>
 
-  <h2 class="section-title">Topics</h2>
+  <!-- RESOURCES -->
+  <div class="page" id="page-resources">
+    <div class="breadcrumb">
+      <button class="back-btn" onclick="showPage('home')">← Home</button>
+      <span aria-hidden="true">/</span>
+      <span>Resources</span>
+    </div>
 
-  <div class="card-list">
-    <a href="#" class="card" aria-label="Sensory tips — learn how to manage sensory experiences">
-      <div class="card-icon" aria-hidden="true">👂</div>
-      <div class="card-body">
-        <h3>Sensory tips</h3>
-        <p>Simple, practical ideas for managing sounds, lights, and textures in everyday life.</p>
+    <h1>Resources</h1>
+    <p>Practical information and tips for everyday life. Each section covers a different topic. You can read them in any order.</p>
+
+    <div class="section">
+      <h2>👂 Managing sensory experiences</h2>
+      <ul class="tips-list">
+        <li><span class="tip-icon" aria-hidden="true">🎧</span><div><strong>Noise-cancelling headphones</strong> can reduce overwhelming sounds in public spaces like shops, trains, or offices.</div></li>
+        <li><span class="tip-icon" aria-hidden="true">🕶️</span><div><strong>Tinted glasses or a cap</strong> can reduce the effect of bright overhead lights, including fluorescent lighting.</div></li>
+        <li><span class="tip-icon" aria-hidden="true">🧸</span><div><strong>Fidget tools</strong> give your hands something to do and can help with focus and self-regulation.</div></li>
+        <li><span class="tip-icon" aria-hidden="true">🗺️</span><div><strong>Planning routes in advance</strong> can reduce the stress of new or unpredictable environments.</div></li>
+        <li><span class="tip-icon" aria-hidden="true">🏠</span><div><strong>A calm space at home</strong> — a quiet room with dim lighting and familiar objects — can help recovery after overwhelming experiences.</div></li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>📅 Routines and predictability</h2>
+      <ul class="tips-list">
+        <li><span class="tip-icon" aria-hidden="true">📋</span><div><strong>Visual schedules</strong> show the day's activities in order and reduce uncertainty about what comes next.</div></li>
+        <li><span class="tip-icon" aria-hidden="true">⏰</span><div><strong>Transition warnings</strong> — giving a 5-minute notice before changing activity — can make transitions easier.</div></li>
+        <li><span class="tip-icon" aria-hidden="true">📱</span><div><strong>Task management apps</strong> such as Todoist or a simple notes app can help structure the day.</div></li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>💬 Communication</h2>
+      <ul class="tips-list">
+        <li><span class="tip-icon" aria-hidden="true">✍️</span><div><strong>Written communication</strong> (text or email) gives more time to process and respond, without real-time pressure.</div></li>
+        <li><span class="tip-icon" aria-hidden="true">🃏</span><div><strong>Communication cards</strong> with pre-written phrases can help in situations where speaking is difficult.</div></li>
+        <li><span class="tip-icon" aria-hidden="true">🗣️</span><div><strong>Scripts for common situations</strong> (ordering food, asking for help) can reduce anxiety in social interactions.</div></li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>🔗 Further reading</h2>
+      <div class="resource-grid">
+        <div class="resource-card">
+          <span class="resource-tag">Organisation</span>
+          <h3>Autistica</h3>
+          <p>UK-based autism research charity. Clear, evidence-based information about autism.</p>
+        </div>
+        <div class="resource-card">
+          <span class="resource-tag sage">Research</span>
+          <h3>Double Empathy Problem</h3>
+          <p>Research by Dr Damian Milton on communication between autistic and non-autistic people.</p>
+        </div>
+        <div class="resource-card">
+          <span class="resource-tag warm">Design</span>
+          <h3>WCAG Guidelines</h3>
+          <p>Web Content Accessibility Guidelines — the international standard for accessible web design.</p>
+        </div>
+        <div class="resource-card">
+          <span class="resource-tag">Community</span>
+          <h3>Neurodiversity Hub</h3>
+          <p>Resources and support for neurodivergent people in education and work.</p>
+        </div>
       </div>
-    </a>
-    <a href="#" class="card" aria-label="Routines — building predictable daily schedules">
-      <div class="card-icon" aria-hidden="true">📅</div>
-      <div class="card-body">
-        <h3>Routines</h3>
-        <p>How to build a daily schedule that feels safe and predictable. Step-by-step guides.</p>
-      </div>
-    </a>
-    <a href="#" class="card" aria-label="Communication — tools and strategies for clearer communication">
-      <div class="card-icon" aria-hidden="true">💬</div>
-      <div class="card-body">
-        <h3>Communication</h3>
-        <p>Tools and strategies for clear, comfortable communication with others.</p>
-      </div>
-    </a>
+    </div>
+
+    <button class="btn" onclick="showPage('contact')">
+      <span aria-hidden="true">✉️</span> Contact us with questions
+    </button>
   </div>
 
-  <!-- Form example — accessible -->
-  <h2 class="section-title">Send us a message</h2>
-  <div class="form-section">
-    <form onsubmit="handleSubmit(event)">
-      <div class="form-group">
-        <label for="name">Your name <span class="required-note">(required)</span></label>
-        <p class="hint" id="name-hint">Enter your first name, or a nickname — whatever you are comfortable with.</p>
-        <input type="text" id="name" name="name" autocomplete="given-name"
-               aria-describedby="name-hint" aria-required="true"
-               placeholder="e.g. Alex">
-      </div>
-      <div class="form-group">
-        <label for="email">Email address <span class="required-note">(required)</span></label>
-        <p class="hint" id="email-hint">We will only use this to reply to your message. We do not share it.</p>
-        <input type="email" id="email" name="email" autocomplete="email"
-               aria-describedby="email-hint" aria-required="true"
-               placeholder="e.g. alex@example.com">
-      </div>
-      <div class="form-group">
-        <label for="message">Your message <span class="required-note">(required)</span></label>
-        <p class="hint" id="msg-hint">Write whatever you want to say. There is no right or wrong way to write it.</p>
-        <textarea id="message" name="message"
-                  aria-describedby="msg-hint" aria-required="true"
-                  placeholder="Type your message here..."></textarea>
-      </div>
-      <button type="submit" class="btn-submit">
-        <span aria-hidden="true">✉️</span> Send message
-      </button>
-    </form>
+  <!-- CONTACT -->
+  <div class="page" id="page-contact">
+    <div class="breadcrumb">
+      <button class="back-btn" onclick="showPage('home')">← Home</button>
+      <span aria-hidden="true">/</span>
+      <span>Contact</span>
+    </div>
+
+    <h1>Contact us</h1>
+    <p>Use the form below to send us a message. There is no time limit. Take as long as you need.</p>
+
+    <div class="info-box">
+      <p>We will reply within <strong>3 working days</strong>. You do not need to write formally — write however feels comfortable for you.</p>
+    </div>
+
+    <div class="form-section">
+      <form onsubmit="handleSubmit(event)" novalidate>
+        <div class="form-group">
+          <label for="name">Your name <span class="req">(required)</span></label>
+          <p class="hint" id="name-hint">Use your first name, a nickname, or initials — whatever you prefer.</p>
+          <input type="text" id="name" name="name" autocomplete="given-name"
+                 aria-describedby="name-hint" aria-required="true" placeholder="e.g. Alex">
+        </div>
+        <div class="form-group">
+          <label for="email">Email address <span class="req">(required)</span></label>
+          <p class="hint" id="email-hint">We will only use this to reply to your message. We do not share it with anyone.</p>
+          <input type="email" id="email" name="email" autocomplete="email"
+                 aria-describedby="email-hint" aria-required="true" placeholder="e.g. alex@example.com">
+        </div>
+        <div class="form-group">
+          <label for="topic">Topic <span class="req">(optional)</span></label>
+          <p class="hint" id="topic-hint">Choose the topic that best fits your message. If none fit, choose "Other".</p>
+          <select id="topic" name="topic" aria-describedby="topic-hint">
+            <option value="">— Choose a topic —</option>
+            <option value="sensory">Sensory tips</option>
+            <option value="routines">Routines</option>
+            <option value="communication">Communication</option>
+            <option value="design">Website design</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="message">Your message <span class="req">(required)</span></label>
+          <p class="hint" id="msg-hint">Write whatever you want to say. There is no right or wrong way to write it.</p>
+          <textarea id="message" name="message"
+                    aria-describedby="msg-hint" aria-required="true"
+                    placeholder="Type your message here..."></textarea>
+        </div>
+        <button type="submit" class="btn">
+          <span aria-hidden="true">✉️</span> Send message
+        </button>
+        <div class="success-msg" id="successMsg" role="status" aria-live="polite">
+          <span aria-hidden="true">✅</span>
+          Thank you. Your message has been sent. We will reply within 3 working days.
+        </div>
+      </form>
+    </div>
+
+    <div class="section">
+      <h2>Other ways to reach us</h2>
+      <ul class="tips-list">
+        <li><span class="tip-icon" aria-hidden="true">📧</span><div><strong>Email:</strong> hello@calmgarden.example — you can also write directly to this address.</div></li>
+        <li><span class="tip-icon" aria-hidden="true">⏱️</span><div><strong>Response time:</strong> We reply within 3 working days. If we need more time, we will let you know.</div></li>
+        <li><span class="tip-icon" aria-hidden="true">🌍</span><div><strong>Language:</strong> You can write in English or Polish. We will reply in the same language.</div></li>
+      </ul>
+    </div>
   </div>
 
 </main>
 
 <footer>
-  <p>Calm Garden · Designed with autism-friendly principles in mind · No cookies, no tracking</p>
+  <p>Calm Garden · Designed with autism-friendly and universal design principles · No cookies · No tracking · No adverts</p>
 </footer>
 
 <script>
+function showPage(pageId) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+  document.getElementById('page-' + pageId).classList.add('active');
+  const navLink = document.getElementById('nav-' + pageId);
+  if (navLink) navLink.classList.add('active');
+  const titles = { home:'Calm Garden — Home', about:'Calm Garden — About', resources:'Calm Garden — Resources', contact:'Calm Garden — Contact' };
+  document.title = titles[pageId] || 'Calm Garden';
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  window.scrollTo({ top: 0, behavior: prefersReduced ? 'auto' : 'smooth' });
+}
+
+document.querySelectorAll('.card').forEach(el => {
+  el.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); el.click(); }
+  });
+});
+document.querySelectorAll('nav a').forEach(el => {
+  el.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); el.click(); }
+  });
+});
+
 function toggleTheme() {
   const body = document.body;
   const btn = document.getElementById('themeToggle');
@@ -565,7 +639,10 @@ function toggleSize() {
 
 function handleSubmit(e) {
   e.preventDefault();
-  alert('Thank you for your message. We will reply within 3 working days. You can close this page now.');
+  const msg = document.getElementById('successMsg');
+  msg.classList.add('show');
+  e.target.reset();
+  msg.focus();
 }
 </script>
 </body>

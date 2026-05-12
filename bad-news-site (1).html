@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🔥NEWSBLAST 9000🔥</title>
+<link href="https://fonts.googleapis.com/css2?family=Creepster&family=Boogaloo&display=swap" rel="stylesheet">
+<style>
+/* BAD SITE — 4 "pages", all break autism-friendly rules:
+   ❌ Constant flashing/blinking animations (ignored prefers-reduced-motion)
+   ❌ Neon colors on pure white
+   ❌ 7-9px font size
+   ❌ ALL CAPS text walls, line-height 1.1
+   ❌ Icons-only navigation, no labels
+   ❌ Hover-only dropdowns (touch users locked out)
+   ❌ Crosshair cursor everywhere
+   ❌ No focus styles
+   ❌ Countdown timer looping forever
+   ❌ Color as only signal (red=breaking, green=live)
+   ❌ Stacking popups with near-invisible close buttons
+   ❌ Flashing ads
+   ❌ Chaotic multi-column layouts
+   ❌ Elements shake/bounce constantly
+   ❌ White text on yellow footer (invisible)
+   ❌ Surprise popup on every page change
+*/
+
+*{margin:0;padding:0;box-sizing:border-box;cursor:crosshair!important;}
+*:focus{outline:none;}
+
+@keyframes flash{0%,49%{opacity:1}50%,100%{opacity:0}}
+@keyframes ticker{from{transform:translateX(100%)}to{transform:translateX(-100%)}}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+@keyframes bgpulse{0%{background:#ff0000}50%{background:#aa0000}100%{background:#ff0000}}
+@keyframes adflash{0%{background:#ff00ff}33%{background:#00ffff}66%{background:#ffff00}100%{background:#ff00ff}}
+@keyframes rainbow{0%{color:#f00}16%{color:#f80}33%{color:#ff0}50%{color:#0f0}66%{color:#00f}83%{color:#80f}100%{color:#f00}}
+@keyframes zoom{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+
+body{font-family:'Boogaloo',cursive;background:#fff;color:#000;font-size:13px;overflow-x:hidden;}
+
+/* BREAKING BAR */
+.breaking-bar{background:#ff0000;animation:bgpulse 0.4s infinite;display:flex;align-items:center;height:30px;overflow:hidden;}
+.breaking-label{background:#ffff00;color:#ff0000;font-size:0.7rem;font-weight:900;padding:0 10px;height:100%;display:flex;align-items:center;white-space:nowrap;animation:flash 0.3s infinite;font-family:'Creepster',cursive;flex-shrink:0;}
+.ticker-wrap{overflow:hidden;flex:1;height:100%;display:flex;align-items:center;}
+.ticker-inner{display:inline-block;white-space:nowrap;animation:ticker 5s linear infinite;color:#ffff00;font-size:0.75rem;font-weight:700;}
+
+/* HEADER */
+header{background:linear-gradient(135deg,#000080,#ff0000,#000080);padding:8px 12px;display:flex;align-items:center;justify-content:space-between;border-bottom:6px solid #ffff00;}
+.site-title{font-family:'Creepster',cursive;font-size:2.2rem;color:#ffff00;text-shadow:3px 3px #ff0000,6px 6px #ff00ff;animation:shake 0.4s infinite;}
+.live-badge{background:#00ff00;color:#000;font-size:8px;font-weight:900;padding:2px 6px;border-radius:2px;animation:flash 0.5s infinite;}
+
+/* NAV — icons only, hover dropdowns */
+nav{background:#000080;display:flex;border-bottom:4px solid #ff0000;position:relative;}
+.nav-item{position:relative;}
+.nav-item>a{display:block;padding:10px 14px;color:#ffff00;text-decoration:none;font-size:8px;border-right:1px solid #ff0000;cursor:crosshair!important;}
+.nav-item>a:hover,.nav-item>a.nav-active{background:#ff0000;}
+.dropdown{display:none;position:absolute;top:100%;left:0;background:#000;border:2px solid #ff0000;z-index:200;min-width:110px;}
+.nav-item:hover .dropdown{display:block;}
+.dropdown a{display:block;padding:4px 8px;color:#00ff00;text-decoration:none;font-size:7px;border-bottom:1px solid #333;cursor:crosshair!important;}
+.dropdown a:hover{background:#ff0000;color:#fff;}
+
+/* TIMER */
+.timer-bar{background:#000;color:#ff0000;text-align:center;font-size:9px;padding:4px;animation:flash 0.6s infinite;font-family:'Creepster',cursive;border-bottom:3px solid #ff0000;}
+
+/* RULES BOX — hard to read on purpose */
+.rules-box{background:#000080;color:#ffff00;font-size:7px;padding:4px 8px;line-height:1.2;border:2px dashed #ff0000;margin:2px;}
+
+/* PAGES */
+.page{display:none;}
+.page.active{display:block;}
+
+/* ── HOME layout ── */
+.home-grid{display:grid;grid-template-columns:170px 1fr 1fr 150px 130px;gap:3px;padding:3px;background:#ffff00;min-height:500px;}
+
+.left-sidebar{background:#ff00ff;padding:6px;display:flex;flex-direction:column;gap:4px;}
+.widget{background:#00ffff;border:3px dashed #ff0000;padding:6px;animation:bounce 0.6s infinite;}
+.widget-title{font-size:8px;font-weight:900;text-transform:uppercase;color:#ff0000;border-bottom:2px solid #ff0000;margin-bottom:4px;}
+.widget-item{font-size:7px;color:#000080;padding:2px 0;border-bottom:1px dotted #ff00ff;cursor:crosshair!important;}
+.widget-item.hot{color:#ff0000;}
+
+.col-main{background:#fff;padding:6px;}
+.hero{border:4px solid #ff0000;padding:8px;margin-bottom:6px;animation:zoom 2s infinite;}
+.hero h1{font-family:'Creepster',cursive;font-size:1.3rem;color:#ff0000;text-transform:uppercase;line-height:1.1;margin-bottom:6px;animation:flash 1s infinite;}
+.fake-video{width:100%;height:110px;background:linear-gradient(45deg,#000,#333);display:flex;align-items:center;justify-content:center;margin-bottom:6px;overflow:hidden;position:relative;}
+.fake-video::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(255,255,255,0.04) 2px,rgba(255,255,255,0.04) 4px);animation:ticker 0.5s linear infinite;}
+.play-btn{width:38px;height:38px;background:rgba(255,0,0,0.8);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:1.1rem;animation:zoom 0.5s infinite;z-index:1;}
+.art-text{font-size:8px;line-height:1.1;text-transform:uppercase;color:#000;}
+
+.art-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;}
+.art-card{border:2px solid;padding:4px;}
+.art-card:nth-child(1){border-color:#ff0000;background:#fff0f0;}
+.art-card:nth-child(2){border-color:#00cc00;background:#f0fff0;}
+.art-card:nth-child(3){border-color:#0000ff;background:#f0f0ff;}
+.art-card h3{font-size:8px;text-transform:uppercase;line-height:1.1;margin-bottom:3px;}
+.art-card p{font-size:7px;color:#555;line-height:1.1;}
+.read-more{font-size:6px;color:#0000ff;text-decoration:underline;cursor:crosshair!important;}
+
+.col-right{background:#f0f0f0;padding:6px;}
+.trend-title{font-family:'Creepster',cursive;font-size:0.9rem;color:#ff0000;animation:shake 0.5s infinite;text-transform:uppercase;margin-bottom:6px;}
+.trend-item{display:flex;gap:4px;margin-bottom:4px;padding:4px;border:1px solid #ccc;animation:bounce 1s infinite;}
+.trend-num{font-size:1.3rem;font-family:'Creepster',cursive;color:#ff0000;line-height:1;animation:flash 0.5s infinite;}
+.trend-text{font-size:7px;text-transform:uppercase;line-height:1.2;}
+
+.ad-sidebar{background:#000;padding:4px;display:flex;flex-direction:column;gap:4px;}
+.ad-block{padding:8px 4px;text-align:center;animation:adflash 0.3s infinite;border:3px solid #fff;font-size:8px;font-weight:900;color:#000;}
+
+.far-right{background:#000080;padding:4px;color:white;}
+.stocks-title{font-size:8px;color:#ffff00;animation:flash 0.4s infinite;font-weight:900;margin-bottom:4px;text-transform:uppercase;}
+.stock-item{font-size:7px;display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px solid #ffffff22;}
+.stock-up{color:#00ff00;}
+.stock-down{color:#ff0000;}
+
+/* ── ARTICLE page ── */
+.article-page{background:#fff;padding:8px;}
+.article-page h2{font-family:'Creepster',cursive;font-size:1.5rem;color:#ff0000;text-transform:uppercase;animation:flash 0.8s infinite;line-height:1.1;margin-bottom:8px;}
+.article-body{font-size:8px;line-height:1.1;text-transform:uppercase;color:#000;margin-bottom:8px;}
+.article-img{width:100%;height:150px;background:linear-gradient(135deg,#ff0000,#000080);display:flex;align-items:center;justify-content:center;font-size:3rem;margin-bottom:8px;animation:adflash 0.5s infinite;}
+.related-title{font-size:9px;font-weight:900;text-transform:uppercase;color:#ff0000;animation:shake 0.4s infinite;margin-bottom:4px;}
+.related-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:3px;}
+.related-card{background:#000;color:#00ff00;padding:4px;font-size:7px;text-transform:uppercase;border:2px solid #ff0000;animation:bounce 0.5s infinite;cursor:crosshair!important;}
+
+/* ── SPORT page ── */
+.sport-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:3px;padding:3px;background:#00ff00;}
+.sport-card{background:#000080;color:#ffff00;padding:6px;border:3px solid #ff0000;}
+.sport-card h3{font-family:'Creepster',cursive;font-size:0.9rem;text-transform:uppercase;animation:flash 0.6s infinite;color:#ff0000;margin-bottom:4px;}
+.sport-card p{font-size:7px;line-height:1.1;text-transform:uppercase;color:#00ff00;}
+.score-box{background:#ff0000;color:#ffff00;font-size:1.5rem;font-family:'Creepster',cursive;text-align:center;padding:4px;animation:zoom 0.5s infinite;margin-bottom:4px;}
+
+/* ── CONTACT page ── */
+.contact-wrap{background:#ff00ff;padding:8px;display:grid;grid-template-columns:1fr 1fr;gap:4px;}
+.contact-col{background:#ffff00;padding:6px;}
+.contact-col h2{font-family:'Creepster',cursive;font-size:1.1rem;color:#ff0000;text-transform:uppercase;animation:shake 0.4s infinite;margin-bottom:6px;}
+.bad-label{font-size:7px;color:#0000ff;display:block;margin-bottom:1px;}/* ❌ tiny label */
+.bad-input{width:100%;background:#00ff00;border:4px dotted #ff0000;padding:2px;font-size:7px;margin-bottom:4px;font-family:'Boogaloo',cursive;}
+.bad-input::placeholder{color:#00ff00;} /* invisible placeholder */
+.bad-textarea{width:100%;height:60px;background:#00ffff;border:4px dotted #ff00ff;padding:2px;font-size:7px;font-family:'Boogaloo',cursive;resize:none;}
+.bad-submit{background:linear-gradient(#ff0000,#00ff00,#0000ff);color:white;border:none;padding:3px 8px;font-size:8px;cursor:crosshair!important;animation:spin 1s infinite;display:inline-block;font-family:'Boogaloo',cursive;}
+.contact-info{font-size:7px;line-height:1.2;text-transform:uppercase;}
+.contact-info p{color:#ff0000;margin-bottom:4px;}
+
+/* POPUPS */
+.surprise-popup{position:fixed;top:15%;left:50%;transform:translateX(-50%);background:#ff0000;color:#ffff00;border:8px solid #00ff00;padding:20px;z-index:9999;text-align:center;animation:shake 0.2s infinite;font-family:'Creepster',cursive;font-size:1.1rem;max-width:280px;box-shadow:0 0 60px #ff00ff;}
+.popup-close{position:absolute;top:2px;right:4px;background:none;border:none;color:rgba(255,255,0,0.1);font-size:8px;cursor:crosshair!important;}
+.cookie-popup{position:fixed;bottom:0;left:0;right:0;background:#000;color:#fff;padding:6px 12px;font-size:7px;display:flex;align-items:center;justify-content:space-between;z-index:9998;border-top:4px solid #ff0000;}
+.cookie-accept{background:#ff0000;color:#fff;border:none;padding:2px 6px;font-size:7px;font-family:'Boogaloo',cursive;cursor:crosshair!important;}
+.cookie-close{background:none;border:none;color:rgba(255,255,255,0.1);font-size:7px;cursor:crosshair!important;}
+
+footer{background:#ffff00;color:#ffffff;font-size:6px;text-align:center;padding:4px;border-top:8px solid #ff00ff;animation:rainbow 0.3s infinite;}
+</style>
+</head>
+<body>
+
+<!-- COOKIE POPUP -->
+<div class="cookie-popup" id="cookie">
+  <span>we use 9999 cookies, trackers, and dark magic. by existing near this site you agree to everything.</span>
+  <div style="display:flex;gap:4px;">
+    <button class="cookie-accept" onclick="this.parentElement.parentElement.remove()">OK FINE</button>
+    <button class="cookie-close" onclick="this.parentElement.parentElement.remove()">reject (does nothing)</button>
+  </div>
+</div>
+
+<!-- SURPRISE POPUP (shown on page change) -->
+<div class="surprise-popup" id="surprise" style="display:none;">
+  <button class="popup-close" onclick="document.getElementById('surprise').style.display='none'">✕</button>
+  🚨 WAIT!!! 🚨<br>
+  <span style="font-size:0.7rem;">DON'T LEAVE THIS PAGE!!!<br>DEALS EXPIRE IN 3 SECONDS!!!</span>
+</div>
+
+<!-- RULES BOX -->
+<div class="rules-box">❌ RULES BROKEN: 1)flashing bg 2)7-9px font 3)neon+white 4)ignores prefers-reduced-motion 5)chaotic grids 6)ALL CAPS walls 7)icons-only nav 8)hover-only dropdowns 9)countdown timer loops forever 10)color-only signals 11)stacking popups 12)flashing ads 13)crosshair cursor 14)no focus styles 15)white on yellow footer 16)shake/bounce everywhere 17)placeholder=label 18)spinning submit btn 19)surprise popup every page 20)clickbait headlines</div>
+
+<!-- BREAKING BAR -->
+<div class="breaking-bar">
+  <div class="breaking-label">⚡ BREAKING ⚡</div>
+  <div class="ticker-wrap"><span class="ticker-inner">🔴 SOMETHING HAPPENED — EXPERTS BAFFLED &nbsp;&nbsp; 💥 LOCAL MAN DOES THING — YOU WON'T BELIEVE &nbsp;&nbsp; 🔥 THIS CHANGES EVERYTHING — DETAILS UNCLEAR &nbsp;&nbsp; ⚡ SCIENTISTS DISCOVER SOMETHING &nbsp;&nbsp; 🚨 BREAKING: SOMETHING IS HAPPENING RIGHT NOW &nbsp;&nbsp;</span></div>
+</div>
+
+<div class="timer-bar" id="timer">⏰ EXCLUSIVE OFFER EXPIRES IN: 10:00 — HURRY!!!</div>
+
+<header>
+  <div class="site-title">📰 NEWSBLAST 9000 📰</div>
+  <span class="live-badge">● LIVE</span>
+</header>
+
+<!-- NAV — icon only, hover dropdowns -->
+<nav>
+  <div class="nav-item">
+    <a id="nav-home" class="nav-active" onclick="showPage('home')">🏠</a>
+    <div class="dropdown">
+      <a onclick="showPage('home')">top stories</a>
+      <a onclick="showPage('home')">latest</a>
+    </div>
+  </div>
+  <div class="nav-item">
+    <a id="nav-article" onclick="showPage('article')">💥</a>
+    <div class="dropdown">
+      <a onclick="showPage('article')">breaking</a>
+      <a onclick="showPage('article')">analysis???</a>
+    </div>
+  </div>
+  <div class="nav-item">
+    <a id="nav-sport" onclick="showPage('sport')">⚽</a>
+    <div class="dropdown">
+      <a onclick="showPage('sport')">scores</a>
+      <a onclick="showPage('sport')">results (maybe)</a>
+    </div>
+  </div>
+  <div class="nav-item">
+    <a id="nav-contact" onclick="showPage('contact')">📞</a>
+    <div class="dropdown">
+      <a onclick="showPage('contact')">contact (lol)</a>
+    </div>
+  </div>
+  <div class="nav-item"><a>💰</a></div>
+  <div class="nav-item"><a>🎬</a></div>
+  <div class="nav-item"><a>❓</a></div>
+</nav>
+
+<!-- ═══════════ HOME ═══════════ -->
+<div class="page active" id="page-home">
+  <div class="home-grid">
+    <div class="left-sidebar">
+      <div class="widget">
+        <div class="widget-title">MOST READ</div>
+        <div class="widget-item hot" onclick="showPage('article')">SOMETHING BIG</div>
+        <div class="widget-item" onclick="showPage('article')">thing happened</div>
+        <div class="widget-item hot" onclick="showPage('article')">ANOTHER THING</div>
+        <div class="widget-item" onclick="showPage('article')">someone said stuff</div>
+        <div class="widget-item hot" onclick="showPage('article')">BIG DEAL?? MAYBE</div>
+      </div>
+      <div class="widget">
+        <div class="widget-title">POLL</div>
+        <p style="font-size:7px;margin-bottom:3px;">IS THIS NEWS??</p>
+        <input type="radio" name="poll"> <span style="font-size:7px;">yes</span><br>
+        <input type="radio" name="poll"> <span style="font-size:7px;">no</span><br>
+        <button style="font-size:7px;background:#f00;color:#fff;border:none;padding:1px 4px;margin-top:3px;">VOTE</button>
+      </div>
+    </div>
+
+    <div class="col-main">
+      <div class="hero" onclick="showPage('article')" style="cursor:crosshair!important;">
+        <h1>YOU WON'T BELIEVE WHAT HAPPENED TODAY AND EXPERTS ARE COMPLETELY BAFFLED</h1>
+        <div class="fake-video"><div class="play-btn">▶</div></div>
+        <p class="art-text">SOMETHING VERY SIGNIFICANT OCCURRED TODAY IN A PLACE THAT EXISTS AND PEOPLE WHO WERE THERE DESCRIBED IT AS A THING THAT HAPPENED. SOURCES CLOSE TO THE SITUATION WHO CANNOT BE NAMED FOR REASONS WE CANNOT DISCLOSE HAVE CONFIRMED THAT THE EVENT DID INDEED TAKE PLACE. THE IMPLICATIONS ARE UNCLEAR BUT EXPERTS AGREE THAT SOMETHING IS DEFINITELY GOING ON.</p>
+      </div>
+      <div class="art-grid">
+        <div class="art-card" onclick="showPage('article')">
+          <h3>THING CONFIRMED BY SOURCE</h3>
+          <p class="art-text">A THING HAS BEEN CONFIRMED BY A SOURCE.</p>
+          <a class="read-more">read??? →</a>
+        </div>
+        <div class="art-card" onclick="showPage('sport')">
+          <h3>SPORT THING HAPPENS</h3>
+          <p class="art-text">SOMEONE SCORED OR DIDN'T. UNCLEAR.</p>
+          <a class="read-more">read??? →</a>
+        </div>
+        <div class="art-card" onclick="showPage('article')">
+          <h3>SITUATION DEVELOPS — UNCLEAR HOW</h3>
+          <p class="art-text">THE SITUATION CONTINUES. CHECK BACK.</p>
+          <a class="read-more">read??? →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-right">
+      <div class="trend-title">🔥 TRENDING 🔥</div>
+      <div class="trend-item" onclick="showPage('article')"><div class="trend-num">1</div><div class="trend-text">SOMETHING HAPPENED AND EVERYONE TALKS ABOUT IT</div></div>
+      <div class="trend-item" onclick="showPage('article')"><div class="trend-num">2</div><div class="trend-text">PERSON DOES THING — INTERNET REACTS</div></div>
+      <div class="trend-item" onclick="showPage('sport')"><div class="trend-num">3</div><div class="trend-text">SPORT RESULT — EMOTIONS??</div></div>
+      <div class="trend-item" onclick="showPage('article')"><div class="trend-num">4</div><div class="trend-text">EVERYTHING IS FINE (OR IS IT???)</div></div>
+      <div class="trend-item" onclick="showPage('article')"><div class="trend-num">5</div><div class="trend-text">BREAKING: THING STILL HAPPENING</div></div>
+    </div>
+
+    <div class="ad-sidebar">
+      <div class="ad-block">🎯 BUY THIS NOW!!!</div>
+      <div class="ad-block">💊 DOCTORS HATE HIM</div>
+      <div class="ad-block">🏠 MAKE $$$$ HOME</div>
+      <div class="ad-block">⚡ CLICK NOW</div>
+    </div>
+
+    <div class="far-right">
+      <div class="stocks-title">📈 STOCKS</div>
+      <div class="stock-item"><span>AAPL</span><span class="stock-up">+2.3%</span></div>
+      <div class="stock-item"><span>GOOG</span><span class="stock-down">-1.1%</span></div>
+      <div class="stock-item"><span>TSLA</span><span class="stock-down">-4.2%</span></div>
+      <div class="stock-item"><span>META</span><span class="stock-up">+1.5%</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ ARTICLE ═══════════ -->
+<div class="page" id="page-article">
+  <div class="article-page">
+    <p style="font-size:7px;color:#f00;animation:flash 0.4s infinite;">🔴 BREAKING &nbsp;|&nbsp; <span style="cursor:crosshair!important;" onclick="showPage('home')">← back (maybe)</span></p>
+    <h2>YOU WON'T BELIEVE WHAT HAPPENED: A FULL INVESTIGATION INTO THE THING THAT OCCURRED SOMEWHERE AT SOME POINT IN TIME</h2>
+    <div class="article-img">📰</div>
+    <p class="article-body">SOMETHING VERY SIGNIFICANT OCCURRED TODAY IN A PLACE THAT EXISTS AND PEOPLE WHO WERE THERE DESCRIBED IT AS A THING THAT HAPPENED. SOURCES CLOSE TO THE SITUATION WHO CANNOT BE NAMED FOR REASONS WE CANNOT DISCLOSE HAVE CONFIRMED THAT THE EVENT DID INDEED TAKE PLACE AT A TIME THAT HAS NOW PASSED. THE IMPLICATIONS OF THIS DEVELOPMENT ARE UNCLEAR BUT EXPERTS AGREE THAT SOMETHING IS DEFINITELY GOING ON AND WILL PROBABLY CONTINUE TO GO ON FOR THE FORESEEABLE FUTURE UNLESS IT STOPS. ONE EXPERT SAID SOMETHING ABOUT IT WHICH WE CANNOT QUOTE BECAUSE WE DIDN'T ACTUALLY SPEAK TO THEM. ANOTHER SOURCE WHO IS ALSO UNNAMED AGREED OR DISAGREED — WE WILL UPDATE THIS STORY AS THINGS HAPPEN OR DON'T HAPPEN. STAY TUNED FOR MORE INFORMATION THAT MAY OR MAY NOT BE AVAILABLE AT A LATER DATE WHEN WE FIGURE OUT WHAT IS GOING ON.</p>
+    <p style="font-size:7px;color:#0000ff;text-transform:uppercase;margin-bottom:6px;">BY: JOURNALIST PERSON &nbsp;|&nbsp; DATE: RECENTLY &nbsp;|&nbsp; <span style="color:#ff0000;animation:flash 0.3s infinite;display:inline-block;">VIEWS: 9,999,999</span></p>
+    <div class="related-title">🔥 YOU MIGHT ALSO LIKE (OR NOT, IDK) 🔥</div>
+    <div class="related-grid">
+      <div class="related-card" onclick="showPage('home')">ANOTHER THING HAPPENED SOMEWHERE</div>
+      <div class="related-card" onclick="showPage('sport')">SPORT SCORE UNCLEAR</div>
+      <div class="related-card" onclick="showPage('home')">EXPERT SAYS SOMETHING</div>
+      <div class="related-card" onclick="showPage('contact')">CONTACT US (WE WON'T REPLY)</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ SPORT ═══════════ -->
+<div class="page" id="page-sport">
+  <p style="font-size:7px;color:#f00;padding:4px;background:#000;animation:flash 0.4s infinite;">⚽ SPORT SECTION &nbsp;|&nbsp; <span style="cursor:crosshair!important;" onclick="showPage('home')">← back (maybe)</span></p>
+  <div class="sport-grid">
+    <div class="sport-card">
+      <div class="score-box">3 — 2</div>
+      <h3>TEAM A VS TEAM B</h3>
+      <p class="sport-card">THE GAME HAPPENED. SOMEONE WON. THE SCORE IS ABOVE. WE THINK. CHECK SOMEWHERE ELSE TO CONFIRM.</p>
+    </div>
+    <div class="sport-card">
+      <div class="score-box">? — ?</div>
+      <h3>UPCOMING MATCH MAYBE</h3>
+      <p>DATE: SOON. TIME: UNKNOWN. LOCATION: SOMEWHERE. TICKETS: EXPENSIVE PROBABLY.</p>
+    </div>
+    <div class="sport-card">
+      <div class="score-box">1 — 1</div>
+      <h3>DRAW HAPPENED</h3>
+      <p>NOBODY WON. EVERYBODY SAD. OR HAPPY. DEPENDS ON WHO YOU SUPPORT. WE DON'T KNOW WHO YOU SUPPORT.</p>
+    </div>
+    <div class="sport-card">
+      <div class="score-box">🏆</div>
+      <h3>RANKINGS</h3>
+      <p style="font-size:7px;color:#ff0000;animation:flash 0.5s infinite;">1. TEAM??? &nbsp; 2. TEAM??? &nbsp; 3. TEAM??? &nbsp; (DATA UNVERIFIED)</p>
+    </div>
+    <div class="sport-card" onclick="showPage('article')">
+      <h3>PLAYER DOES SOMETHING</h3>
+      <p>A PLAYER ON A TEAM DID SOMETHING DURING OR AFTER A GAME. CLICK FOR DETAILS (DETAILS UNAVAILABLE).</p>
+      <a class="read-more" style="color:#00ff00;">read more →</a>
+    </div>
+    <div class="sport-card">
+      <div class="ad-block" style="font-size:7px;">🎰 BET NOW — TOTALLY LEGAL PROBABLY</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ CONTACT ═══════════ -->
+<div class="page" id="page-contact">
+  <p style="font-size:7px;color:#f00;padding:4px;background:#000;animation:flash 0.4s infinite;">📞 CONTACT &nbsp;|&nbsp; <span style="cursor:crosshair!important;" onclick="showPage('home')">← back (maybe)</span></p>
+  <div class="contact-wrap">
+    <div class="contact-col">
+      <h2>CONTACT US (lol)</h2>
+      <!-- ❌ placeholder as label, tiny font, no autocomplete -->
+      <span class="bad-label">ur name maybe</span>
+      <input class="bad-input" type="text" placeholder="name (invisible placeholder)">
+      <span class="bad-label">email or whatever</span>
+      <input class="bad-input" type="text" placeholder="email (also invisible)">
+      <span class="bad-label">message (we won't read it)</span>
+      <textarea class="bad-textarea" placeholder="type here (pointless)"></textarea>
+      <br>
+      <!-- ❌ spinning submit button, tiny target -->
+      <button class="bad-submit" onclick="alert('lol no')">SEND (spinning)</button>
+      <p style="font-size:6px;color:#ff0000;margin-top:4px;">* by submitting you agree to receive 9000 emails per day forever</p>
+    </div>
+    <div class="contact-col">
+      <h2>OTHER INFO</h2>
+      <div class="contact-info">
+        <p>ADDRESS: SOMEWHERE ON THE INTERNET</p>
+        <p>PHONE: WE DON'T HAVE ONE</p>
+        <p>EMAIL: <span style="color:#ffff00;">yellow@invisible.com</span></p><!-- ❌ invisible on yellow -->
+        <p>HOURS: <span style="animation:flash 0.3s infinite;display:inline-block;">UNKNOWN</span></p>
+        <p>RESPONSE TIME: NEVER PROBABLY</p>
+        <p>GDPR: <span style="font-size:5px;">we are compliant (source: trust us)</span></p>
+      </div>
+      <div style="margin-top:8px;">
+        <div class="ad-block" style="font-size:7px;">📧 SUBSCRIBE TO 9000 EMAILS/DAY</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>© 2026 NEWSBLAST 9000 LLC | Terms (lol) | No Refunds | Privacy? lol | Unsubscribe (impossible) | We own your soul</footer>
+
+<script>
+// Timer — loops forever
+let t = 600;
+setInterval(()=>{
+  if(t<=0)t=600; t--;
+  const m=String(Math.floor(t/60)).padStart(2,'0');
+  const s=String(t%60).padStart(2,'0');
+  document.getElementById('timer').textContent=`⏰ EXCLUSIVE OFFER EXPIRES IN: ${m}:${s} — HURRY!!!`;
+},1000);
+
+// Page switcher — shows surprise popup every time
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('nav a').forEach(a=>a.classList.remove('nav-active'));
+  document.getElementById('page-'+id).classList.add('active');
+  const nav=document.getElementById('nav-'+id);
+  if(nav)nav.classList.add('nav-active');
+  // ❌ Surprise popup on every navigation
+  const pop=document.getElementById('surprise');
+  pop.style.display='block';
+  setTimeout(()=>pop.style.display='none', 3000);
+  window.scrollTo(0,0);
+}
+
+// ❌ Random beep on hover over buttons
+document.querySelectorAll('button,a').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{
+    try{
+      const ctx=new AudioContext();
+      const o=ctx.createOscillator();
+      o.connect(ctx.destination);
+      o.frequency.value=400+Math.random()*800;
+      o.start(); o.stop(ctx.currentTime+0.04);
+    }catch(e){}
+  });
+});
+</script>
+</body>
+</html>
